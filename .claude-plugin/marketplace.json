@@ -1,5 +1,6 @@
 {
   "name": "linkedin-role-optimizer",
+  "description": "Marketplace hosting the LinkedIn Profile Optimizer plugin for Claude Code.",
   "owner": {
     "name": "Nikhil Arora",
     "url": "https://github.com/nikhilvdev"
