@@ -1,0 +1,24 @@
+{
+  "name": "linkedin-profile-optimizer",
+  "displayName": "LinkedIn Profile Optimizer",
+  "version": "1.0.0",
+  "description": "Audits a LinkedIn profile PDF against a target job title/designation and produces a Markdown document with multiple phrasing options for headline, About, Skills, and each Experience entry.",
+  "author": {
+    "name": "Nikhil Arora",
+    "url": "https://github.com/nikhilvdev"
+  },
+  "homepage": "https://github.com/nikhilvdev/linkedin-role-optimizer",
+  "repository": "https://github.com/nikhilvdev/linkedin-role-optimizer",
+  "license": "Apache-2.0",
+  "keywords": [
+    "linkedin",
+    "resume",
+    "career",
+    "job-search",
+    "personal-branding",
+    "profile-optimization",
+    "career-coaching",
+    "recruiting",
+    "job-application"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "linkedin-role-optimizer",
+  "owner": {
+    "name": "Nikhil Arora",
+    "url": "https://github.com/nikhilvdev"
+  },
+  "plugins": [
+    {
+      "name": "linkedin-profile-optimizer",
+      "source": "./",
+      "description": "Audit a LinkedIn profile against a target job title and get multiple phrasing options for headline, About, Skills, and Experience.",
+      "category": "career",
+      "tags": [
+        "linkedin",
+        "resume",
+        "career",
+        "job-search",
+        "personal-branding"
+      ],
+      "author": {
+        "name": "Nikhil Arora",
+        "url": "https://github.com/nikhilvdev"
+      }
+    }
+  ]
+}
