@@ -1,22 +1,29 @@
 {
-  "name": "linkedin-role-optimizer",
-  "description": "Marketplace hosting the LinkedIn Profile Optimizer plugin for Claude Code.",
+  "name": "job-search-pack",
+  "description": "Marketplace hosting The Job Search Pack — five Claude Code skills for resume tailoring, cover letters, LinkedIn optimization, salary negotiation, and job application tracking.",
   "owner": {
     "name": "Nikhil Arora",
     "url": "https://github.com/nikhilvdev"
   },
   "plugins": [
     {
-      "name": "linkedin-profile-optimizer",
+      "name": "job-search-pack",
       "source": "./",
-      "description": "Audit a LinkedIn profile against a target job title and get multiple phrasing options for headline, About, Skills, and Experience.",
+      "description": "Land better roles, faster — ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker, in one pack.",
       "category": "career",
       "tags": [
         "linkedin",
         "resume",
-        "career",
+        "resume-tailoring",
+        "cover-letter",
+        "salary-negotiation",
+        "job-tracker",
         "job-search",
-        "personal-branding"
+        "career",
+        "personal-branding",
+        "ats",
+        "interview-prep",
+        "job-application"
       ],
       "author": {
         "name": "Nikhil Arora",
