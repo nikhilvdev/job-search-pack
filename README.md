@@ -3,7 +3,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Claude Skill](https://img.shields.io/badge/Claude-Agent%20Skill-D97757.svg)](https://www.anthropic.com/news/skills)
 
-A Claude Code plugin bundling five **Agent Skills** that cover the full job search: tailored applications, interview and negotiation prep, and a tracker to keep the whole pipeline organized. Land better roles, faster — with Claude doing the heavy lifting on each stage.
+Five **Agent Skills** that cover the full job search: tailored applications, interview and negotiation prep, and a tracker to keep the whole pipeline organized. Land better roles, faster — with AI doing the heavy lifting on each stage. Ships as both a **Claude Code plugin** and a **Gemini CLI extension** — same `skills/` folder, same `SKILL.md` files, no divergent content to maintain.
 
 ## Skills in this pack
 
@@ -58,6 +58,16 @@ cp -r ~/job-search-pack/skills/resume-tailor .claude/skills/resume-tailor
 
 Either way, the target folder must contain `SKILL.md` at its root. Restart Claude Code (or start a new session) so it re-scans the skills directories — no further setup needed.
 
+### Gemini CLI — as an extension (recommended for Gemini)
+
+This repo also ships a `gemini-extension.json` at its root, pointing at the same `skills/` folder used by the Claude Code plugin — Gemini CLI auto-discovers every `skills/<name>/SKILL.md` bundled inside an installed extension, so no separate Gemini-specific skill files are needed:
+
+```bash
+gemini extensions install https://github.com/nikhilvdev/job-search-pack
+```
+
+Restart your Gemini CLI session afterward so it picks up the newly installed skills. Gemini's Agent Skills use the same `name`/`description` YAML frontmatter convention as Claude's and are triggered the same way — by natural language matching against each skill's `description`, not by explicit slash commands. Run `/skills` in Gemini CLI to confirm all five are listed.
+
 ### claude.ai (web) and Claude Desktop
 
 1. Go to **Settings → Capabilities → Skills** (web) or the equivalent Skills section in Desktop settings.
@@ -70,7 +80,7 @@ Upload the specific `skills/<name>` folder (containing that skill's `SKILL.md`) 
 
 ## How to invoke a skill
 
-None of these are slash commands — you don't type `/resume-tailor`. Claude loads the matching skill automatically when your request fits the trigger described in that skill's `SKILL.md` frontmatter. Just describe what you want in plain language and attach whatever files are relevant.
+None of these are slash commands — you don't type `/resume-tailor`. Both Claude Code and Gemini CLI load the matching skill automatically when your request fits the trigger described in that skill's `SKILL.md` frontmatter. Just describe what you want in plain language and attach whatever files are relevant.
 
 **Example trigger phrases, one per skill:**
 
@@ -80,7 +90,7 @@ None of these are slash commands — you don't type `/resume-tailor`. Claude loa
 - **Salary Negotiator** — *"Help me negotiate this offer"* / *"Is $145k competitive for a Staff Engineer in Austin?"* (paste the offer details)
 - **Job Tracker** — *"Add this application to my tracker"* / *"What applications need a follow-up?"* (no attachment needed)
 
-**What you get back:** each skill delivers a Markdown file as an attachment, not pasted into chat — open it, and for the multi-option skills (Resume Tailor, Cover Letter Writer, LinkedIn Optimizer, Salary Negotiator) pick the option that fits your voice and ask Claude to finalize it. Job Tracker instead maintains one running file across sessions.
+**What you get back:** each skill delivers a Markdown file as an attachment, not pasted into chat — open it, and for the multi-option skills (Resume Tailor, Cover Letter Writer, LinkedIn Optimizer, Salary Negotiator) pick the option that fits your voice and ask the assistant to finalize it. Job Tracker instead maintains one running file across sessions.
 
 ## Optimizing for discovery
 
