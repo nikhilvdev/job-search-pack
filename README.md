@@ -2,8 +2,10 @@
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Claude Skill](https://img.shields.io/badge/Claude-Agent%20Skill-D97757.svg)](https://www.anthropic.com/news/skills)
+[![Gemini CLI Extension](https://img.shields.io/badge/Gemini%20CLI-Extension-4285F4.svg)](https://github.com/google-gemini/gemini-cli)
+[![Codex CLI Skill](https://img.shields.io/badge/Codex%20CLI-Agent%20Skill-10A37F.svg)](https://developers.openai.com/codex/skills)
 
-Five **Agent Skills** that cover the full job search: tailored applications, interview and negotiation prep, and a tracker to keep the whole pipeline organized. Land better roles, faster — with AI doing the heavy lifting on each stage. Ships as both a **Claude Code plugin** and a **Gemini CLI extension** — same `skills/` folder, same `SKILL.md` files, no divergent content to maintain.
+Five **Agent Skills** that cover the full job search: tailored applications, interview and negotiation prep, and a tracker to keep the whole pipeline organized. Land better roles, faster — with AI doing the heavy lifting on each stage. Works with **Claude Code**, **Gemini CLI**, and **OpenAI Codex CLI** — the `SKILL.md` format (YAML `name`/`description` frontmatter + Markdown instructions) is the same across all three, so it's one `skills/` folder with no divergent content to maintain per platform.
 
 ## Skills in this pack
 
@@ -20,6 +22,8 @@ Each skill's `SKILL.md` documents its own required/optional inputs, step-by-step
 ## Install
 
 These are [Agent Skills](https://www.anthropic.com/news/skills) — `SKILL.md` files with YAML frontmatter that Claude loads automatically based on their `description`. There's no separate "run" step; Claude picks up a matching skill on its own once a request fits its trigger conditions.
+
+All three plugin/extension manifests point at the one `skills/` folder rather than duplicating any skill content, and two of the three follow the same dot-folder convention: `.claude-plugin/` (Claude Code) and `.codex-plugin/` (OpenAI Codex CLI) each hold a `plugin.json`. Gemini CLI is the one exception — its tooling requires `gemini-extension.json` to sit at the repo root rather than in a subfolder, so it's not wrapped in a matching `.gemini-plugin/`-style folder; that's a Gemini CLI constraint, not an inconsistency in how this repo is organized.
 
 ### Claude Code — as a plugin (recommended)
 
@@ -68,6 +72,34 @@ gemini extensions install https://github.com/nikhilvdev/job-search-pack
 
 Restart your Gemini CLI session afterward so it picks up the newly installed skills. Gemini's Agent Skills use the same `name`/`description` YAML frontmatter convention as Claude's and are triggered the same way — by natural language matching against each skill's `description`, not by explicit slash commands. Run `/skills` in Gemini CLI to confirm all five are listed.
 
+### OpenAI Codex CLI — as a plugin (recommended)
+
+This repo also ships a `.codex-plugin/plugin.json`, mirroring the `.claude-plugin/` setup — one manifest that packages all five skills (via its `skills: "./skills/"` pointer) as a single installable plugin, no separate marketplace catalog file needed since this repo exposes just one plugin:
+
+```bash
+codex plugin marketplace add nikhilvdev/job-search-pack
+```
+
+Then, inside a Codex session, run `/plugins` to open the plugin browser and install **job-search-pack** from the marketplace source you just added. Start a new Codex session afterward so it picks up the bundled skills.
+
+### OpenAI Codex CLI — manual skill install
+
+If your Codex CLI version predates plugin support, or you only want specific skills rather than the whole pack, Codex also reads plain `SKILL.md` files directly — no conversion needed — from an `.agents/skills/` directory (not the plugin's `skills/`, and not Gemini's extension folder). Two routes:
+
+Per-skill, via Codex's built-in installer — run inside a Codex session, once per skill you want:
+```
+$skill-installer install https://github.com/nikhilvdev/job-search-pack/tree/main/skills/resume-tailor
+```
+Swap in `cover-letter-writer`, `linkedin-profile-optimizer`, `salary-negotiator`, or `job-tracker` for the others.
+
+Or manually, same clone-once pattern as the Claude Code manual install above:
+```bash
+git clone https://github.com/nikhilvdev/job-search-pack.git ~/job-search-pack
+mkdir -p ~/.agents/skills
+for d in ~/job-search-pack/skills/*/; do ln -s "${d%/}" ~/.agents/skills/"$(basename "$d")"; done
+```
+That installs all five as personal skills (available in every Codex project). For a single project instead, `mkdir -p .agents/skills` inside that project and copy (not symlink, so it ships with the repo) just the skill folder(s) you want — Codex scans `.agents/skills` from your current directory up through the repo root. Restart Codex afterward so it picks up the new skills.
+
 ### claude.ai (web) and Claude Desktop
 
 1. Go to **Settings → Capabilities → Skills** (web) or the equivalent Skills section in Desktop settings.
@@ -80,7 +112,7 @@ Upload the specific `skills/<name>` folder (containing that skill's `SKILL.md`) 
 
 ## How to invoke a skill
 
-None of these are slash commands — you don't type `/resume-tailor`. Both Claude Code and Gemini CLI load the matching skill automatically when your request fits the trigger described in that skill's `SKILL.md` frontmatter. Just describe what you want in plain language and attach whatever files are relevant.
+None of these are slash commands — you don't type `/resume-tailor`. Claude Code, Gemini CLI, and OpenAI Codex CLI all load the matching skill automatically when your request fits the trigger described in that skill's `SKILL.md` frontmatter. Just describe what you want in plain language and attach whatever files are relevant.
 
 **Example trigger phrases, one per skill:**
 
@@ -94,12 +126,13 @@ None of these are slash commands — you don't type `/resume-tailor`. Both Claud
 
 ## Optimizing for discovery
 
-This repo is set up to surface in three separate places people "search for skills":
+This repo is set up to surface in four separate places people "search for skills":
 
-1. **Claude's own auto-matching** (inside Claude Code / claude.ai / Desktop) — driven entirely by each skill's YAML `description`, one per `skills/<name>/SKILL.md`. Each is written with target phrasings, task synonyms, and example requests spelled out, since Claude matches on that text, not the repo name or README.
-2. **Claude Code plugin/marketplace search** — `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` carry `keywords`, `category`, `tags`, `description`, and `author` fields covering all five skills, which is what `/plugin marketplace add` / marketplace browsing indexes on.
-3. **Plain GitHub/web search** — driven by the repo's topics and README text, not the plugin manifests. Two things worth doing once, outside of Claude:
-   - Set repo topics (Settings → topics, or `gh repo edit --add-topic`) to something like: `claude`, `claude-code`, `claude-skill`, `claude-plugin`, `agent-skills`, `linkedin`, `resume`, `cover-letter`, `salary-negotiation`, `job-tracker`, `ats`, `career`, `job-search`.
+1. **Each platform's own auto-matching** (Claude Code / claude.ai / Desktop, Gemini CLI, OpenAI Codex CLI) — driven entirely by each skill's YAML `description`, one per `skills/<name>/SKILL.md`. Each is written with target phrasings, task synonyms, and example requests spelled out, since all three match on that text, not the repo name or README.
+2. **Claude Code plugin/marketplace search** — `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` carry `keywords`, `category`, `tags`, `description`, and `author` fields covering all five skills, which is what `/plugin marketplace add` / marketplace browsing indexes on. `.codex-plugin/plugin.json` carries the same metadata for `codex plugin marketplace add` / the Codex CLI plugin browser.
+3. **Gemini CLI skill and extension listings** — `gemini-extension.json` carries the pack-level `name`/`description` Gemini indexes on; the `$skill-installer` / marketplace tooling on the Codex side also indexes each skill's own `SKILL.md` frontmatter plus the repo's GitHub topics.
+4. **Plain GitHub/web search** — driven by the repo's topics and README text, not the plugin manifests. Two things worth doing once, outside of Claude:
+   - Set repo topics (Settings → topics, or `gh repo edit --add-topic`) to something like: `claude`, `claude-code`, `claude-skill`, `claude-plugin`, `gemini-cli`, `codex`, `openai-codex`, `agent-skills`, `linkedin`, `resume`, `cover-letter`, `salary-negotiation`, `job-tracker`, `ats`, `career`, `job-search`.
    - If you want broader reach, submit the plugin to Anthropic's community marketplace (`anthropics/claude-plugins-community`) per [the plugin docs](https://code.claude.com/docs/en/plugins#submit-your-plugin-to-the-community-marketplace) — it goes through their validation/safety screening before listing.
 
 ## License

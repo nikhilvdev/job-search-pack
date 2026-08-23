@@ -1,0 +1,37 @@
+{
+  "name": "job-search-pack",
+  "version": "1.0.0",
+  "description": "Five OpenAI Codex CLI Agent Skills covering the full job search: ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker.",
+  "author": {
+    "name": "Nikhil Arora",
+    "url": "https://github.com/nikhilvdev"
+  },
+  "homepage": "https://github.com/nikhilvdev/job-search-pack",
+  "repository": "https://github.com/nikhilvdev/job-search-pack",
+  "license": "Apache-2.0",
+  "keywords": [
+    "linkedin",
+    "resume",
+    "resume-tailoring",
+    "cover-letter",
+    "salary-negotiation",
+    "job-tracker",
+    "job-application",
+    "career",
+    "job-search",
+    "personal-branding",
+    "profile-optimization",
+    "career-coaching",
+    "recruiting",
+    "ats",
+    "interview-prep"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "The Job Search Pack",
+    "shortDescription": "Land better roles, faster — ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker, in one pack.",
+    "developerName": "Nikhil Arora",
+    "category": "Career",
+    "websiteURL": "https://github.com/nikhilvdev/job-search-pack"
+  }
+}
