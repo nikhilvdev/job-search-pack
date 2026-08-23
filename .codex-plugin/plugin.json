@@ -1,6 +1,6 @@
 {
   "name": "job-search-pack",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Land better roles, faster. Five AI-powered Agent Skills for OpenAI Codex CLI covering the entire job search: ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker — one plugin, install once.",
   "author": {
     "name": "Nikhil Arora",

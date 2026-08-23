@@ -124,16 +124,9 @@ None of these are slash commands — you don't type `/resume-tailor`. Claude Cod
 
 **What you get back:** each skill delivers a Markdown file as an attachment, not pasted into chat — open it, and for the multi-option skills (Resume Tailor, Cover Letter Writer, LinkedIn Optimizer, Salary Negotiator) pick the option that fits your voice and ask the assistant to finalize it. Job Tracker instead maintains one running file across sessions.
 
-## Optimizing for discovery
+## Contributing / publishing
 
-This repo is set up to surface in four separate places people "search for skills":
-
-1. **Each platform's own auto-matching** (Claude Code / claude.ai / Desktop, Gemini CLI, OpenAI Codex CLI) — driven entirely by each skill's YAML `description`, one per `skills/<name>/SKILL.md`. Each is written with target phrasings, task synonyms, and example requests spelled out, since all three match on that text, not the repo name or README.
-2. **Claude Code plugin/marketplace search** — `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` carry `keywords`, `category`, `tags`, `description`, and `author` fields covering all five skills, which is what `/plugin marketplace add` / marketplace browsing indexes on. `.codex-plugin/plugin.json` carries the same metadata for `codex plugin marketplace add` / the Codex CLI plugin browser.
-3. **Gemini CLI skill and extension listings** — `gemini-extension.json` carries the pack-level `name`/`description` Gemini indexes on; the `$skill-installer` / marketplace tooling on the Codex side also indexes each skill's own `SKILL.md` frontmatter plus the repo's GitHub topics.
-4. **Plain GitHub/web search** — driven by the repo's topics and README text, not the plugin manifests. Two things worth doing once, outside of Claude:
-   - Set repo topics (Settings → topics, or `gh repo edit --add-topic`) to something like: `claude`, `claude-code`, `claude-skill`, `claude-plugin`, `gemini-cli`, `codex`, `openai-codex`, `agent-skills`, `ai-agent-skills`, `linkedin`, `resume`, `resume-writing`, `cover-letter`, `salary-negotiation`, `job-offer`, `job-tracker`, `job-hunting`, `ats`, `career`, `career-change`, `job-search`.
-   - If you want broader reach, submit the plugin to Anthropic's community marketplace (`anthropics/claude-plugins-community`) per [the plugin docs](https://code.claude.com/docs/en/plugins#submit-your-plugin-to-the-community-marketplace) — it goes through their validation/safety screening before listing.
+Maintainers: see [RUNBOOK.md](RUNBOOK.md) for how a change ships to Claude Code, Gemini CLI, and OpenAI Codex CLI, and what CI checks on every PR.
 
 ## License
 See [LICENSE](LICENSE).
