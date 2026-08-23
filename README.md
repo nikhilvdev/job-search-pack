@@ -1,5 +1,7 @@
 # The Job Search Pack
 
+[![Latest release](https://img.shields.io/github/v/release/nikhilvdev/job-search-pack?label=release)](https://github.com/nikhilvdev/job-search-pack/releases/latest)
+[![Validate](https://github.com/nikhilvdev/job-search-pack/actions/workflows/validate.yml/badge.svg)](https://github.com/nikhilvdev/job-search-pack/actions/workflows/validate.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Claude Skill](https://img.shields.io/badge/Claude-Agent%20Skill-D97757.svg)](https://www.anthropic.com/news/skills)
 [![Gemini CLI Extension](https://img.shields.io/badge/Gemini%20CLI-Extension-4285F4.svg)](https://github.com/google-gemini/gemini-cli)
