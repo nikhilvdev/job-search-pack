@@ -128,7 +128,7 @@ None of these are slash commands — you don't type `/resume-tailor`. Claude Cod
 
 ## Contributing / publishing
 
-Maintainers: see [RUNBOOK.md](RUNBOOK.md) for how a change ships to Claude Code, Gemini CLI, and OpenAI Codex CLI, and what CI checks on every PR.
+Maintainers: see [RUNBOOK.md](RUNBOOK.md) for how a change ships to Claude Code, Gemini CLI, and OpenAI Codex CLI, and what CI checks on every PR. Participation in this project is governed by our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 See [LICENSE](LICENSE).
