@@ -55,6 +55,30 @@ Merging to `main` makes the new content available to install, but existing insta
 
 None of this is something this repo's CI can push through to a user's machine — it's worth stating in a release's notes when a change is meaningful enough that people should manually re-sync (e.g. "run `gemini extensions update job-search-pack` to get this").
 
-## One-time, manual step: community marketplace listing
+## Getting listed so people can find it without already having the repo URL
 
-Broader discovery via Anthropic's official community marketplace (`anthropics/claude-plugins-community`) is a one-time PR against *their* repo, reviewed by them for validation/safety — not something to automate or re-run per release, since once listed they resolve the plugin by pointing back at this repo's `main`. See [the plugin docs](https://code.claude.com/docs/en/plugins#submit-your-plugin-to-the-community-marketplace) if this hasn't been done yet.
+Installing already works today with just the repo URL/slug (`/plugin marketplace add nikhilvdev/job-search-pack`, `gemini extensions install <url>`, `codex plugin marketplace add nikhilvdev/job-search-pack`) — none of this is required to make the pack *usable*. It's only for making it *discoverable* to people who aren't already looking at this repo.
+
+### Claude: submit to `claude-community`
+
+This is a **web-form submission, not a PR** — there's no file to edit in `anthropics/claude-plugins-community` directly, and it can't be scripted from here since it's a login-gated form; a human has to click through it.
+
+1. Run `claude plugin validate .` from the repo root first — the review pipeline runs the identical check on submission. (Confirmed passing as of the last run in this repo.)
+2. Submit via one of:
+   - [claude.ai/admin-settings/directory/submissions/plugins/new](https://claude.ai/admin-settings/directory/submissions/plugins/new) — requires a Team/Enterprise org with directory management access.
+   - [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit) — for individual authors not on a Team/Enterprise org (this is the one that applies to a personal repo like this one).
+3. Automated safety screening + review runs after submission. Once approved, the plugin is pinned to a commit SHA in `anthropics/claude-plugins-community`'s `marketplace.json`, and Anthropic's CI auto-bumps that pin as new commits land on `main` — so re-submission isn't needed for ordinary updates. The public catalog syncs nightly, so there's a lag between approval and the plugin actually showing up; check by searching the [community catalog](https://github.com/anthropics/claude-plugins-community/blob/main/.claude-plugin/marketplace.json) directly.
+4. There's a separate, Anthropic-curated `claude-plugins-official` marketplace with no public application process — Anthropic adds plugins to it at their own discretion, not from the submission form above.
+
+### Gemini: auto-discovered by the official Extensions Gallery — no form, no PR
+
+Unlike the other two, this one needs no submission step at all — [geminicli.com/extensions](https://geminicli.com/extensions/) crawls public GitHub repos daily and lists anything that qualifies, automatically. Two requirements, both already satisfied by this repo:
+
+1. `gemini-extension.json` must sit at the repo root (it does — see [gemini-extension.json](gemini-extension.json)).
+2. The repo's GitHub **About** topics must include the exact topic `gemini-cli-extension` — that's the tag the crawler filters on. **Done**: added via `gh repo edit --add-topic gemini-cli-extension` (swapped out for `career-change`, since GitHub caps repos at 20 topics and this one is a functional requirement, not just a search keyword).
+
+Nothing further to do here — just wait for the next daily crawl. If it doesn't show up within a few days, re-check that both conditions above still hold (a topic can get dropped if the repo's topic list is ever reset wholesale rather than edited incrementally).
+
+### OpenAI Codex: no equivalent public curated-submission process (yet)
+
+Unlike Claude, [`openai/skills`](https://github.com/openai/skills) doesn't document a public process for a third party to get into its `.curated/` tier (installable by name, e.g. `$skill-installer linear`) — that tier reads as OpenAI-curated. Its `.experimental/` tier ("community and exploratory skills, installed by folder path or GitHub URL") is the closer fit, and the closest verified path there is opening a PR against `openai/skills` adding an entry that points at this repo — which requires signing their CLA on the PR. That repo isn't ours to edit directly, so this is also a manual, human step, not something CI here can do. In the meantime, `codex plugin marketplace add nikhilvdev/job-search-pack` already works standalone with no listing required.
