@@ -2,7 +2,7 @@
   "name": "job-search-pack",
   "displayName": "The Job Search Pack",
   "version": "2.0.0",
-  "description": "Five Claude Code skills covering the full job search: ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker.",
+  "description": "Land better roles, faster. Five AI-powered Claude Skills covering the entire job search: ATS-optimized resume tailoring, company-researched cover letters, LinkedIn profile optimization, salary negotiation prep, and a persistent job application tracker — one pack, install once.",
   "author": {
     "name": "Nikhil Arora",
     "url": "https://github.com/nikhilvdev"
@@ -14,17 +14,23 @@
     "linkedin",
     "resume",
     "resume-tailoring",
+    "resume-writing",
     "cover-letter",
     "salary-negotiation",
+    "compensation",
+    "job-offer",
     "job-tracker",
     "job-application",
-    "career",
+    "job-hunting",
     "job-search",
+    "career",
+    "career-change",
+    "career-coaching",
     "personal-branding",
     "profile-optimization",
-    "career-coaching",
     "recruiting",
     "ats",
-    "interview-prep"
+    "interview-prep",
+    "ai-agent-skills"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "job-search-pack",
-  "description": "Marketplace hosting The Job Search Pack — five Claude Code skills for resume tailoring, cover letters, LinkedIn optimization, salary negotiation, and job application tracking.",
+  "description": "Marketplace hosting The Job Search Pack — five AI Agent Skills for Claude Code covering resume tailoring, cover letters, LinkedIn optimization, salary negotiation, and job application tracking, ready to install with one command.",
   "owner": {
     "name": "Nikhil Arora",
     "url": "https://github.com/nikhilvdev"
@@ -15,15 +15,21 @@
         "linkedin",
         "resume",
         "resume-tailoring",
+        "resume-writing",
         "cover-letter",
         "salary-negotiation",
+        "compensation",
+        "job-offer",
         "job-tracker",
+        "job-application",
+        "job-hunting",
         "job-search",
         "career",
+        "career-change",
         "personal-branding",
         "ats",
         "interview-prep",
-        "job-application"
+        "ai-agent-skills"
       ],
       "author": {
         "name": "Nikhil Arora",
